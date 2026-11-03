@@ -1,0 +1,44 @@
+# py
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# venv
+.venv/
+venv/
+env/
+ENV/
+
+# py tooling and test chache
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# jypitre
+.ipynb_checkpoints/
+
+# artifacts
+/artifacts/
+/mlflow-state/
+
+# data
+/data/test/*
+!/data/test/.gitignore
+!/data/test/metadata.csv.dvc
+
+
+# sys files
+.DS_Store
+Thumbs.db
+
+# local env
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
