@@ -47,6 +47,13 @@ def test_s3_defaults_match_notebook_cells_10_and_11():
     assert config.s3_test_prefix == "test/"
 
 
+def test_test_set_paths_match_notebook_cell_11():
+    config = Config()
+
+    assert config.test_image_dir == "./data/test"
+    assert config.test_metadata_path == "./data/test/metadata.csv"
+
+
 @pytest.mark.parametrize(
     "removed_name",
     ["max_date", "min_date", "original_image_size", "test_data_dir", "threshold"],

@@ -25,6 +25,8 @@ class Config:
     mlflow_state_dir: str = "mlflow-state"
     image_data_dir: str = "./data/images/raw"
     metadata_path: str = "./data/images/metadata.csv"
+    test_image_dir: str = "./data/test"
+    test_metadata_path: str = "./data/test/metadata.csv"
 
     # MLflow
     experiment_name: str = "vial_image_classification"
