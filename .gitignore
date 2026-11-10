@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.so
 .Python
+*.egg-info/
 
 # venv
 .venv/
@@ -42,3 +43,7 @@ Thumbs.db
 !.env.example
 .vscode/
 .idea/
+
+# Python build artifacts
+/build/
+/dist/
