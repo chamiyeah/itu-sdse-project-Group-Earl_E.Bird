@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["cookiecutter", "pytest"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

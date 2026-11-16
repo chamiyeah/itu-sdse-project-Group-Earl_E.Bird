@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.1.0"
+description = "{{ cookiecutter.description }}"
+requires-python = ">={{ cookiecutter.python_version }}"
+dependencies = [
+    "mlflow",
+    "numpy",
+    "pandas",
+    "pillow",
+    "scikit-learn",
+    "torch",
+    "torchvision",
+]
+
+[project.optional-dependencies]
+dev = [
+    "cookiecutter",
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

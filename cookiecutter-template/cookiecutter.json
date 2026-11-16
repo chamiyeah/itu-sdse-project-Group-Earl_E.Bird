@@ -1,0 +1,11 @@
+{
+  "project_name": "Vial Classifier",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
+  "description": "A reproducible machine learning project for classifying vials with contamination.",
+  "author_name": "Group Earl.E Birds",
+  "author_email": "cgan",
+  "python_version": "3.13",
+  "experiment_name": "{{ cookiecutter.package_name }}",
+  "model_name": "cnn_model"
+}

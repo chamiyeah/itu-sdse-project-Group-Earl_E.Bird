@@ -18,6 +18,22 @@ The repository linked in the submission should contain:
 - Dagger workflow (in Go)
 - All history
 
+## Create a new project from the Cookiecutter template
+
+This repository includes a reusable starter template in
+[`cookiecutter-template/`](./cookiecutter-template). Install the development
+dependencies and render a new project with:
+
+```bash
+pip install -e ".[dev]"
+cookiecutter cookiecutter-template
+```
+
+Cookiecutter prompts for the project name, Python package name, and MLflow
+experiment/model names. The generated project includes the `src` layout,
+configuration, tests, DVC directories, and artifact/state ignores used by
+this repository.
+
 ## Inputs
 
 You are given the following material:

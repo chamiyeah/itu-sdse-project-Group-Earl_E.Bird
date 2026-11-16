@@ -1,0 +1,4 @@
+# Keep generated local data out of DVC scans.
+artifacts/
+mlflow-state/
+notebooks/.ipynb_checkpoints/
