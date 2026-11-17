@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import os
 
 
 @dataclass(frozen=True)
@@ -67,3 +68,25 @@ class Config:
     @property
     def mlflow_tracking_uri(self):
         return f"sqlite:///{self.mlflow_state_dir}/mlflow.db"
+
+
+Settings = Config
+
+
+def get_settings() -> Config:
+    """Load configuration with optional VIAL_* environment overrides."""
+    values = {}
+    converters = {
+        "VIAL_NUM_EPOCHS": ("num_epochs", int),
+        "VIAL_BATCH_SIZE": ("batch_size", int),
+        "VIAL_LEARNING_RATE": ("learning_rate", float),
+        "VIAL_RANDOM_STATE": ("random_state", int),
+        "VIAL_ARTIFACT_DIR": ("artifact_dir", str),
+        "VIAL_MLFLOW_STATE_DIR": ("mlflow_state_dir", str),
+        "VIAL_EXPERIMENT_NAME": ("experiment_name", str),
+        "VIAL_MODEL_NAME": ("model_name", str),
+    }
+    for variable, (field, converter) in converters.items():
+        if variable in os.environ:
+            values[field] = converter(os.environ[variable])
+    return Config(**values)
