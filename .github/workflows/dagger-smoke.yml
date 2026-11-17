@@ -1,0 +1,38 @@
+name: Dagger smoke pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: dagger/go.mod
+
+      - name: Set up Dagger
+        uses: dagger/dagger-for-github@8.0.0
+        with:
+          version: "0.19.3"
+
+      - name: Run Dagger smoke pipeline
+        working-directory: dagger
+        run: go run .
+
+      - name: Upload smoke model artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-model-artifact
+          path: artifacts/
+          if-no-files-found: warn
