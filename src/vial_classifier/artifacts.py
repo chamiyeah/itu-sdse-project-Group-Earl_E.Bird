@@ -53,7 +53,8 @@ def load_model_artifact(
         raise FileNotFoundError(f"Model checkpoint not found: {checkpoint_path}")
 
     model = SimpleCNN().to(device)
-    state_dict = torch.load(checkpoint_path, map_location=device, weights_only=True)
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    state_dict = checkpoint["model_state_dict"] if isinstance(checkpoint, dict) and "model_state_dict" in checkpoint else checkpoint
     model.load_state_dict(state_dict)
     model.eval()
     return model, metadata
