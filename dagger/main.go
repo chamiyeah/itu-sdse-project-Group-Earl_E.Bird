@@ -44,6 +44,7 @@ func pipeline(ctx context.Context, client *dagger.Client) error {
 		WithDirectory("/app", client.Host().Directory("..")).
 		WithWorkdir("/app").
 		WithExec([]string{"pip", "install", "--no-cache-dir", "-e", ".[serve]"}).
+		WithEnvVariable("VIAL_ARTIFACT_DIR", "/app/artifacts").
 		WithEntrypoint([]string{
 			"uvicorn", "vial_classifier.api:app",
 			"--host", "0.0.0.0", "--port", "5001",
