@@ -51,6 +51,7 @@ def test_run_training_smoke(tmp_path):
     assert result["artifact_paths"] == expected_files
     for path in expected_files.values():
         assert (tmp_path / path).is_file()
+    assert (tmp_path / "artifacts" / "model_metadata.json").is_file()
     # image_statistics.json is no longer written: nobody read it
     assert not (tmp_path / "artifacts" / "image_statistics.json").exists()
 

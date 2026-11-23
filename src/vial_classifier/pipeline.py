@@ -4,6 +4,7 @@ import os
 import mlflow
 import torch
 
+from vial_classifier.artifacts import ARTIFACT_METADATA_FILE
 from vial_classifier.data.dataset import create_dataloaders, load_image_dataset, split_dataset
 from vial_classifier.drift.baseline import compute_baseline_statistics, log_baseline_to_mlflow
 from vial_classifier.features.transforms import define_transforms
@@ -124,6 +125,17 @@ def run_training(config):
         with open(config.model_results_path, "w") as results_file:
             json.dump(test_results, results_file, indent=2)
         print(f"Model results saved to {config.model_results_path}")
+
+        artifact_metadata = {
+            "model_type": SimpleCNN.__name__,
+            "checkpoint": os.path.basename(config.pytorch_model_path),
+            "class_names": ["clean", "defective"],
+            "threshold": float(optimal_threshold),
+            "image_size": list(config.image_size),
+            "metrics": test_results,
+        }
+        with open(os.path.join(config.artifact_dir, ARTIFACT_METADATA_FILE), "w") as metadata_file:
+            json.dump(artifact_metadata, metadata_file, indent=2, sort_keys=True)
 
     return {
         "optimal_threshold": optimal_threshold,
